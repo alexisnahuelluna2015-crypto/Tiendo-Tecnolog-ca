@@ -1,188 +1,152 @@
 # Tienda-Tecnolog-ca
 Hola bienvenido al emprendimiento estamos trabajando para que sea rápido y seguro🌐
+import { useEffect, useState } from "react";
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tienda Tech Pro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+export default function LandingProductoDigital() {
+  const [timeLeft, setTimeLeft] = useState({
+    hours: 23,
+    minutes: 59,
+    seconds: 59,
+  });
 
-    body {
-      background: #0f172a;
-      color: #f1f5f9;
-    }
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        let { hours, minutes, seconds } = prev;
+        if (seconds > 0) {
+          seconds--;
+        } else {
+          if (minutes > 0) {
+            minutes--;
+            seconds = 59;
+          } else {
+            if (hours > 0) {
+              hours--;
+              minutes = 59;
+              seconds = 59;
+            }
+          }
+        }
+        return { hours, minutes, seconds };
+      });
+    }, 1000);
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 8%;
-      background: rgba(15, 23, 42, 0.9);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+    return () => clearInterval(timer);
+  }, []);
 
-    header h1 {
-      font-size: 26px;
-      font-weight: 700;
-      background: linear-gradient(90deg, #38bdf8, #6366f1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 text-gray-800">
+      {/* HERO */}
+      <section className="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
+            Aprende a dominar [TU RESULTADO] en tiempo récord 🚀
+          </h1>
+          <p className="text-lg text-gray-600 mb-8">
+            El método paso a paso que te ayudará a lograr [beneficio principal] sin
+            perder tiempo ni cometer errores innecesarios.
+          </p>
+          <div className="flex gap-4">
+            <button className="bg-black text-white px-8 py-4 rounded-2xl shadow-lg hover:scale-105 transition">
+              Comprar ahora
+            </button>
+            <button className="border border-gray-300 px-8 py-4 rounded-2xl hover:bg-gray-100 transition">
+              Ver detalles
+            </button>
+          </div>
+        </div>
+        <div className="bg-white p-8 rounded-2xl shadow-xl">
+          <div className="h-64 bg-gray-200 rounded-xl flex items-center justify-center">
+            <span className="text-gray-500">Imagen / Mockup del Producto</span>
+          </div>
+        </div>
+      </section>
 
-    nav a {
-      color: #cbd5e1;
-      text-decoration: none;
-      margin-left: 25px;
-      font-weight: 500;
-      transition: 0.3s;
-    }
+      {/* PROBLEMA */}
+      <section className="bg-white py-20">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl font-bold mb-6">
+            ¿Te pasa que intentas [problema] pero no ves resultados?
+          </h2>
+          <p className="text-gray-600 text-lg">
+            La mayoría de las personas fracasan porque no tienen un sistema claro.
+            Saltan de estrategia en estrategia sin una guía estructurada.
+          </p>
+        </div>
+      </section>
 
-    nav a:hover {
-      color: #38bdf8;
-    }
+      {/* SOLUCIÓN */}
+      <section className="py-20">
+        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+          {["Paso 1", "Paso 2", "Paso 3"].map((item, i) => (
+            <div
+              key={i}
+              className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition"
+            >
+              <h3 className="text-xl font-semibold mb-4">{item}</h3>
+              <p className="text-gray-600">
+                Explicación clara y práctica para avanzar de manera estructurada.
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-    .hero {
-      text-align: center;
-      padding: 100px 20px;
-      background: radial-gradient(circle at top, #1e293b, #0f172a);
-    }
+      {/* QUÉ INCLUYE */}
+      <section className="bg-white py-20">
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            ¿Qué incluye el producto?
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            {["Módulos completos", "Plantillas descargables", "Bonos exclusivos", "Actualizaciones futuras"].map(
+              (item, i) => (
+                <div key={i} className="flex items-start gap-4">
+                  <div className="text-2xl">✔️</div>
+                  <p className="text-lg">{item}</p>
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      </section>
 
-    .hero h2 {
-      font-size: 42px;
-      margin-bottom: 15px;
-    }
+      {/* TESTIMONIOS */}
+      <section className="py-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Lo que dicen nuestros clientes
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((item) => (
+              <div key={item} className="bg-white p-8 rounded-2xl shadow-md">
+                <p className="text-gray-600 mb-4">
+                  "Este producto cambió completamente mi forma de trabajar."
+                </p>
+                <p className="font-semibold">Cliente {item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-    .hero p {
-      font-size: 18px;
-      color: #94a3b8;
-    }
+      {/* PRECIO */}
+      <section className="bg-black text-white py-20">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl font-bold mb-6">Oferta especial por tiempo limitado</h2>
+          <p className="text-lg mb-4 line-through text-gray-400">$199</p>
+          <p className="text-5xl font-bold mb-8">$49</p>
+          <button className="bg-white text-black px-10 py-4 rounded-2xl font-semibold hover:scale-105 transition">
+            Obtener acceso inmediato
+          </button>
+          <p className="text-gray-400 mt-6">Garantía de satisfacción de 7 días</p>
+        </div>
+      </section>
 
-    .productos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      padding: 60px 8%;
-    }
-
-    .card {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-      text-align: center;
-      transition: 0.4s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-    }
-
-    .card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 15px;
-      margin-bottom: 15px;
-    }
-
-    .card h3 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .precio {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 15px;
-      color: #38bdf8;
-    }
-
-    button {
-      background: linear-gradient(90deg, #6366f1, #38bdf8);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      opacity: 0.8;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      background: #0f172a;
-      border-top: 1px solid #1e293b;
-      color: #64748b;
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <h1>Tienda Tech</h1>
-  <nav>
-    <a href="#">Inicio</a>
-    <a href="#productos">Productos</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
-</header>
-
-<section class="hero">
-  <h2>Tecnología que marca la diferencia</h2>
-  <p>Innovación, potencia y estilo en un solo lugar</p>
-</section>
-
-<section class="productos" id="productos">
-  <div class="card">
-    <img src="https://via.placeholder.com/400x300" alt="Laptop Gamer">
-    <h3>Laptop Gamer</h3>
-    <p class="precio">$1200</p>
-    <button onclick="agregarAlCarrito('Laptop Gamer')">Agregar al carrito</button>
-  </div>
-
-  <div class="card">
-    <img src="https://via.placeholder.com/400x300" alt="Auriculares Bluetooth">
-    <h3>Auriculares Bluetooth</h3>
-    <p class="precio">$150</p>
-    <button onclick="agregarAlCarrito('Auriculares Bluetooth')">Agregar al carrito</button>
-  </div>
-
-  <div class="card">
-    <img src="https://via.placeholder.com/400x300" alt="Smartphone Pro">
-    <h3>Smartphone Pro</h3>
-    <p class="precio">$900</p>
-    <button onclick="agregarAlCarrito('Smartphone Pro')">Agregar al carrito</button>
-  </div>
-</section>
-
-<footer id="contacto">
-  <p>© 2026 Tienda Tech - Todos los derechos reservados</p>
-  <p>Contacto: contacto@tiendatech.com</p>
-</footer>
-
-<script>
-  function agregarAlCarrito(producto) {
-    alert(producto + " agregado al carrito 🛒");
-  }
-</script>
-
-</body>
-</html>
+      {/* FOOTER */}
+      <footer className="py-10 text-center text-gray-500 text-sm">
+        © {new Date().getFullYear()} Tu Marca. Todos los derechos reservados.
+      </footer>
+    </div>
+  );
+}
